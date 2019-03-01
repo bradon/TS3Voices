@@ -1,3 +1,10 @@
+LibWebSockets minimal examples are CC-0, are available at
+https://libwebsockets.org, and were used in development of this plugin.
+
+The teamspeak pluginsdk is Copyright (c) 2008-2016 TeamSpeak Systems GmbH.
+
+My additions are licensed under the MIT license.
+
 MIT License
 
 Copyright (c) 2019 Bradon Hall
