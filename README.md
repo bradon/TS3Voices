@@ -33,25 +33,25 @@ This is my first C++ project, feedback on any issues/advice is much appreciated.
 A proper build system to will come later, for now clone libwebsockets and build.
 
 The following snippets might help:
+
 git clone -q https://github.com/warmcat/libwebsockets.git
+
 cd libwebsockets
+
 md build32
+
 cmake -DCMAKE_BUILD_TYPE=Release -DLWS_WITH_SSL=OFF  -S ./ -B ./build32
+
 md build64
+
 cmake -DCMAKE_BUILD_TYPE=Release -DLWS_WITH_SSL=OFF -DCMAKE_GENERATOR_PLATFORM=x64 -S ./ -B ./build64
 
 Place lib, headers and bin for libwebsockets in external and external64, inside root/TS3Voices
-external(64)
-|
-bin-Release-websockets.dll
+external(64)/bin/Release/websockets.dll
 
-external(64)
-|
-include- various headers
+external(64)/include/ various headers
 
-external(64)
-|
-lib-Release-websockets.lib
+external(64)/lib/Release-websockets.lib
 
 Refer to a one of the released plugin files for the structure of the final plugin.
 Ts3_plugin files are just zip files. Rename it to .zip, or use software like 7-zip to open it
