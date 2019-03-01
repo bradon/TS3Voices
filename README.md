@@ -11,7 +11,7 @@ User names are sanitized to prevent problems/exploits, but more testing/dev is n
 
 ![Example Overlay over ArmA](examplearma.png)
 # Usage
-Download the 32 or 64bit plugin, depending on your setup, and double click to install.
+[Download the 32 or 64bit plugin](https://github.com/bradon/TS3Voices/releases), depending on your setup, and double click to install.
 If you are unsure, try both. Teamspeak will only let you install the correct one.
 
 Enable the plugin.
