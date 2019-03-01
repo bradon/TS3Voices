@@ -9,6 +9,7 @@ It is far enough along that it is usable, and ready for requests/feedback.
 This plugin currently does not search for or censor bad names.
 User names are sanitized to prevent problems/exploits, but more testing/dev is needed.
 
+![Example Overlay over ArmA](examplearma.png)
 # Usage
 Download the 32 or 64bit plugin, depending on your setup, and double click to install.
 If you are unsure, try both. Teamspeak will only let you install the correct one.
