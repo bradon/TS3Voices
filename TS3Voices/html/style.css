@@ -1,0 +1,27 @@
+p {
+	vertical-align: top;
+	line-height: 1em;
+	margin:5px;
+	padding: 5px;
+	color: white;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 5px;
+	font-size: 22px;
+	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+	text-shadow:
+	-1px -1px 0 #000,
+	1px -1px 0 #000,
+	-1px 1px 0 #000,
+	1px, 1px 0 #000;
+}
+
+#maindiv {
+	width: 400px;
+}
+
+.talking {
+	font-weight: 900;
+}
+
+.nottalking {
+}
