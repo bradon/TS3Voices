@@ -19,7 +19,7 @@ Add http://localhost:8079 or http://127.0.0.1:8079 as a browser source in OBS.
 Enjoy your stream!
 
 This plugin currently requires obs and teamspeak to be on the same machine.
-If you feel comfortable compiling yourself, just remove the binding to loopback.
+If you feel comfortable compiling yourself, just remove the binding to loopback to change this.
 Otherwise, request I change this if you need it (or wait, it is on the to-do list!)
 
 # Changing Styles
