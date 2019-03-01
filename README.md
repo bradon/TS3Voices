@@ -30,9 +30,9 @@ teamspeak plugins folder/TS3Voices/html to change styles yourself
 
 # Compiling Yourself
 This is my first C++ project, feedback on any issues/advice is much appreciated.
-A proper build system to will come later, for now clone libwebsockets and build.
+A proper build system will be made later.
 
-The following snippets might help:
+The following snippets might help you compile in the meantime:
 
 git clone -q https://github.com/warmcat/libwebsockets.git
 
