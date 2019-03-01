@@ -51,7 +51,7 @@ external(64)/bin/Release/websockets.dll
 
 external(64)/include/ various headers
 
-external(64)/lib/Release-websockets.lib
+external(64)/lib/Release/websockets.lib
 
 Refer to a one of the released plugin files for the structure of the final plugin.
 Ts3_plugin files are just zip files. Rename it to .zip, or use software like 7-zip to open it
