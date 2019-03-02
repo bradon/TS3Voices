@@ -1,6 +1,7 @@
 # Project unique ignores
 TS3Voices/external/
 TS3Voices/external64/
+libwebsockets/
 # Prerequisites
 *.d
 
