@@ -11,8 +11,7 @@ User names are sanitized to prevent problems/exploits, but more testing/dev is n
 
 ![Example Overlay over ArmA](examplearma.png)
 # Usage
-[Download the 32 or 64bit plugin](https://github.com/bradon/TS3Voices/releases), depending on your setup, and double click to install.
-If you are unsure, try both. Teamspeak will only let you install the correct one.
+[Download the plugin](https://github.com/bradon/TS3Voices/releases).
 
 Enable the plugin.
 Add http://localhost:8079 or http://127.0.0.1:8079 as a browser source in OBS.
@@ -29,31 +28,10 @@ If you know some css or feel adventurous you can edit styles.css in the
 teamspeak plugins folder/TS3Voices/html to change styles yourself
 
 # Compiling Yourself
-This is my first C++ project, feedback on any issues/advice is much appreciated.
-A proper build system will be made later.
-
-The following snippets might help you compile in the meantime:
-
-git clone -q https://github.com/warmcat/libwebsockets.git
-
-cd libwebsockets
-
-md build32
-
-cmake -DCMAKE_BUILD_TYPE=Release -DLWS_WITH_SSL=OFF  -S ./ -B ./build32
-
-md build64
-
-cmake -DCMAKE_BUILD_TYPE=Release -DLWS_WITH_SSL=OFF -DCMAKE_GENERATOR_PLATFORM=x64 -S ./ -B ./build64
-
-Place lib, headers and bin for libwebsockets in external and external64, inside root/TS3Voices
-external(64)/bin/Release/websockets.dll
-
-external(64)/include/ various headers
-
-external(64)/lib/Release/websockets.lib
+Clone this repo, and run get_libwebsockets.bat to set up the libwebsockets dependency.
 
 Refer to a one of the released plugin files for the structure of the final plugin.
+
 Ts3_plugin files are just zip files. Rename it to .zip, or use software like 7-zip to open it
 
 # Credits
