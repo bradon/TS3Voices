@@ -4,6 +4,8 @@ TS3Voices/external64/
 libwebsockets/
 # Prerequisites
 *.d
+*.ts3_plugin
+plugins/
 
 # Compiled Object files
 *.slo
