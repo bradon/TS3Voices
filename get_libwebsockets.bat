@@ -19,10 +19,10 @@ md TS3Voices\external
 xcopy /S  libwebsockets\build32\include TS3Voices\external\include\
 md TS3Voices\external\lib
 md TS3Voices\external\lib\Release
-copy libwebsockets\build32\lib\Release\websockets.lib TS3Voices\external\lib\Release\websockets_static.lib
+copy libwebsockets\build32\lib\Release\websockets_static.lib TS3Voices\external\lib\Release\websockets_static.lib
 
 md TS3Voices\external64
 xcopy /S  libwebsockets\build64\include TS3Voices\external64\include\
 md TS3Voices\external64\lib
 md TS3Voices\external64\lib\Release
-copy libwebsockets\build64\lib\Release\websockets.lib TS3Voices\external64\lib\Release\websockets_static.lib
+copy libwebsockets\build64\lib\Release\websockets_static.lib TS3Voices\external64\lib\Release\websockets_static.lib
