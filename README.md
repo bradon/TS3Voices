@@ -6,7 +6,7 @@ A list of people in the channel is shown, with current speakers in bold.
 This is currently a fairly basic project, and might have some bugs.
 It is far enough along that it is usable, and ready for requests/feedback.
 
-This plugin currently does not search for or censor bad names.
+This plugin currently does not (currently) censor offensive names. It does use the nickname you set for a user if you set it, so you can prevent users changing names in the overlay list (right click the user in TS, edit in contacts, switch to friend, set custom nickname, Display->Only custom name). You could also use this to change their name to their twitch/youtube/mixer URL.
 
 ![Example Overlay over ArmA](examplearma.png)
 # Usage
