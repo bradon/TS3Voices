@@ -7,7 +7,6 @@ This is currently a fairly basic project, and might have some bugs.
 It is far enough along that it is usable, and ready for requests/feedback.
 
 This plugin currently does not search for or censor bad names.
-User names are sanitized to prevent problems/exploits, but more testing/dev is needed.
 
 ![Example Overlay over ArmA](examplearma.png)
 # Usage
