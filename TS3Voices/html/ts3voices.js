@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		var talking_prefix = ">>";
 	};
 	if (params.has("tpost")) {
-		var talking_postfix = params.get("tp");
+		var talking_postfix = params.get("tpost");
 	} else {
 		var talking_postfix = "";
 	};
