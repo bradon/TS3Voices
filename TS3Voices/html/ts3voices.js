@@ -61,12 +61,33 @@ document.addEventListener("DOMContentLoaded", function() {
 	} else {
 		var p_margin = "5px";
 	};
-	
+	if (params.has("tp")) {
+		var talking_prefix = params.get("tp");
+	} else {
+		var talking_prefix = ">>";
+	};
+	if (params.has("tpost")) {
+		var talking_postfix = params.get("tp");
+	} else {
+		var talking_postfix = "";
+	};
+	if (params.has("sp")) {
+		var silent_prefix = params.get("sp");
+	} else {
+		var silent_prefix = "";
+	};
+	if (params.has("spost")) {
+		var silent_postfix = params.get("spost");
+	} else {
+		var silent_postfix = "";
+	};
 	var maindiv = document.getElementById("maindiv");
 	maindiv.style.width = div_width;
 	
 	function talking(p_element) {
 		if (!(p_element.classList.contains("talking"))) {
+			p_element.childNodes[0].nodeValue = talking_prefix;
+			p_element.childNodes[2].nodeValue = talking_postfix;
 			p_element.classList.add("talking");
 			p_element.style.color=talking_color;
 			p_element.style.fontWeight=talking_font_weight;
@@ -75,6 +96,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	function silent(p_element) {
 		if ((p_element.classList.contains("talking"))) {
+			p_element.childNodes[0].nodeValue = silent_prefix;
+			p_element.childNodes[2].nodeValue = silent_postfix;
 			p_element.classList.remove("talking");
 			p_element.style.color=silent_color;
 			p_element.style.fontWeight=silent_font_weight;
@@ -131,7 +154,11 @@ document.addEventListener("DOMContentLoaded", function() {
 					newuser.style.fontFamily = p_font;
 					newuser.style.margin = p_margin;
 					var node = document.createTextNode(data.users[i].name);
+					var prefixnode = document.createTextNode(silent_prefix);
+					var postfixnode = document.createTextNode(silent_postfix);
+					newuser.appendChild(prefixnode);
 					newuser.appendChild(node);
+					newuser.appendChild(postfixnode);
 					if (data.users[i].talking == 1) {
 						talking(newuser);
 					} else { // special own user case does not apply at first update
@@ -142,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					var maindiv = document.getElementById("maindiv");
 					maindiv.appendChild(newuser);
 				} else {
-					document.getElementById(data.users[i].clientID).childNodes[0].nodeValue = data.users[i].name;
+					document.getElementById(data.users[i].clientID).childNodes[1].nodeValue = data.users[i].name;
 					if (data.users[i].talking == 1) {
 						talking(existinguser);
 
