@@ -3,91 +3,43 @@ document.addEventListener("DOMContentLoaded", function() {
 	const queryString = location.search;
 	const params = new URLSearchParams(location.search);
 	
+	
+	function setVarFromURL(varname, vardefault) {
+		if (params.has(varname)) {
+			return params.get(varname);
+		} else {
+			return vardefault;
+		};
+	};
+	var talking_color = setVarFromURL("tc", "#ffffff");
 	// Possible way to validate params:
 	// Set to a p element, fetch, see if it
 	// holds the set value
-	if (params.has("tc")) {
-		var talking_color = params.get("tc");
-	} else {
-		var talking_color = "white";
-	}
-	if (params.has("tfw")) {
-		var talking_font_weight = params.get("tfw");
-	} else {
-		var talking_font_weight = 900;
-	};
-	if (params.has("sc")) {
-		var silent_color = params.get("sc");
-	} else {
-		var silent_color = "white";
-	};
-	if (params.has("sfw")) {
-		var silent_font_weight = params.get("sfw");
-	} else {
-		var silent_font_weight = 400;
-	};
+	var talking_font_weight = setVarFromURL("tfw",900);
+	var silent_color = setVarFromURL("sc", "#ffffff");
+	var silent_font_weight = setVarFromURL("sfw", 400);
 	if (params.has("r") && params.has("g") && params.has("b") && params.has("a")) {
 		var p_background = "rgba(" + params.get("r") + "," + params.get("g") + "," + params.get("b") + "," +params.get("a") + ")"; 
 	} else {
 		var p_background = "rgba(0,0,0,0.5)";
 	};
-	if (params.has("fs")) {
-		var font_size = params.get("fs");
-	} else {
-		var font_size = "22px";
-	};
-	if (params.has("pad")) {
-		var p_padding = params.get("pad");
-	} else {
-		var p_padding = "5px";
-	};
-	if (params.has("br")) {
-		var p_border_radius = params.get("br");
-	} else {
-		var p_border_radius = "5px";
-	};
-	if (params.has("font")) {
-		var p_font = params.get("font");
-	} else {
-		var p_font = "Arial,Helvetica Neue,Helvetica,sans-serif";
-	};
-	if (params.has("width")) {
-		var div_width = params.get("width");
-	} else {
-		var div_width = "400px";
-	};
-	if (params.has("margin")) {
-		var p_margin = params.get("margin");
-	} else {
-		var p_margin = "5px";
-	};
-	if (params.has("tp")) {
-		var talking_prefix = params.get("tp");
-	} else {
-		var talking_prefix = ">>";
-	};
-	if (params.has("tpost")) {
-		var talking_postfix = params.get("tpost");
-	} else {
-		var talking_postfix = "";
-	};
-	if (params.has("sp")) {
-		var silent_prefix = params.get("sp");
-	} else {
-		var silent_prefix = "";
-	};
-	if (params.has("spost")) {
-		var silent_postfix = params.get("spost");
-	} else {
-		var silent_postfix = "";
-	};
+	var font_size = setVarFromURL("fs", "22px");
+	var p_padding = setVarFromURL("pad", "5px");
+	var p_border_radius = setVarFromURL("br", "5px");
+	var p_font = setVarFromURL("font", "Arial,Helvetica Neue,Helvetica,sans-serif");
+	var div_width = setVarFromURL("width", "400px");
+	var p_margin = setVarFromURL("margin", "5px");
+	var talking_prefix = setVarFromURL("tp", ">>");
+	var talking_suffix = setVarFromURL("ts", "");
+	var silent_prefix = setVarFromURL("sp", "");
+	var silent_suffix = setVarFromURL("ss", "");
 	var maindiv = document.getElementById("maindiv");
 	maindiv.style.width = div_width;
 	
 	function talking(p_element) {
 		if (!(p_element.classList.contains("talking"))) {
 			p_element.childNodes[0].nodeValue = talking_prefix;
-			p_element.childNodes[2].nodeValue = talking_postfix;
+			p_element.childNodes[2].nodeValue = talking_suffix;
 			p_element.classList.add("talking");
 			p_element.style.color=talking_color;
 			p_element.style.fontWeight=talking_font_weight;
@@ -97,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function silent(p_element) {
 		if ((p_element.classList.contains("talking"))) {
 			p_element.childNodes[0].nodeValue = silent_prefix;
-			p_element.childNodes[2].nodeValue = silent_postfix;
+			p_element.childNodes[2].nodeValue = silent_suffix;
 			p_element.classList.remove("talking");
 			p_element.style.color=silent_color;
 			p_element.style.fontWeight=silent_font_weight;
@@ -155,10 +107,10 @@ document.addEventListener("DOMContentLoaded", function() {
 					newuser.style.margin = p_margin;
 					var node = document.createTextNode(data.users[i].name);
 					var prefixnode = document.createTextNode(silent_prefix);
-					var postfixnode = document.createTextNode(silent_postfix);
+					var suffixnode = document.createTextNode(silent_suffix);
 					newuser.appendChild(prefixnode);
 					newuser.appendChild(node);
-					newuser.appendChild(postfixnode);
+					newuser.appendChild(suffixnode);
 					if (data.users[i].talking == 1) {
 						talking(newuser);
 					} else { // special own user case does not apply at first update
