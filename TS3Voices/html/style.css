@@ -1,6 +1,8 @@
 p {
 	vertical-align: top;
 	line-height: 1em;
+	overflow: hidden;
+	white-space: nowrap;
 	/*text-shadow:
 	-1px -1px 0 #000,
 	1px -1px 0 #000,
@@ -9,6 +11,7 @@ p {
 }
 
 #maindiv {
+	overflow: hidden;
 }
 
 /* Used as a tag */

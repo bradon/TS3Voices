@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta charset=utf-8 http-equiv="Content-Language" content="en"/>
+	<script src="/custom.js"></script>
+	<link rel="stylesheet" type="text/css" href="custom.css">
+</head>
+<body>
+Preview of settings shown on the left, change the settings on the right, and copy the result url to use at the bottom of the page.
+</br>
+Show overlay over an example game:
+<select id="content_example">
+<option>None</option>
+<option value="stellaris.png">Stellaris</option>
+<option value="arma.png">ArmA 3</option>
+<option value="elite.png">Elite Dangerous</option>
+</select></br>
+Remember, you can resize and move the browser source in OBS. Change sizes and widths to change proportion, not final size in your stream.
+</br>
+Supported fonts include Arial, Times New Roman, Consolas, Courier, Verdana and Comic Sans MS</br>
+The preview updates when you click anywhere on the page outside the box you just updated.
+<div id="container">
+<div id="maindiv">
+</div>
+<div id="seperator">
+</div>
+<div id="custom">
+	Font size: <input type="number" id="fs" name="fs"></br>
+	Font: <input type="text" id="font" name="font"></br>
+	Color when talking: <input type="color" id="tc" name="tc"></br>
+	Font weight when talking: <select id = "tfw">
+								<option value=100>100</option>
+								<option value=400>400</option>
+								<option value=700>700</option>
+								<option value=900>900</option>
+							  <select></br>
+	Prefix when talking: <input type="text" id="tp" size="10"></br>
+	Color when silent: <input type="color" id="sc" name="sc"></br>
+	Font weight when silent: <select name = "sfw" id="sfw">
+								<option value=100>100</option>
+								<option value=400>400</option>
+								<option value=700>700</option>
+								<option value=900>900</option>
+							  </select></br>
+	Overlay color: </br>
+	<div id="background_div">
+	<div id="background_labels">Red </br> Green </br> Blue </br> Opacity</div>
+	<div id="background_picker">
+	<input type="range" min="0" max="255" name="p_r" id="p_r"></br>
+	<input type="range" min="0" max="255" name="p_g" id="p_g"></br>
+	<input type="range" min="0" max="255" name="p_b" id="p_b"></br>
+	<input type="range" min="0" max="10" name="p_a" id="p_a"></br>
+	</div>
+	</div>
+</div>
+</div>
+URL to use in OBS: <input id="obsurl" type="text" size="80"></br>
+URL to recover custom options:<input id="customurl" type="text" size="70"></br>
+</body>
+</html>

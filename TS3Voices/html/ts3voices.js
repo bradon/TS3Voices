@@ -3,6 +3,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	const queryString = location.search;
 	const params = new URLSearchParams(location.search);
 	
+	// Defaults
+	var default_tc = "#ffffff", default_sc = "#ffffff";
+	var default_tfw = 900, default_sfw = 400;
+	var p_r = 0, p_g = 0, p_b = 0, p_a = 0.5;
+	var default_fs = 22, default_width = 400;
+	var default_background = "rgba("+p_r+","+p_g+","+p_b+","+p_a+")";
+	var default_tp = "", default_sp = "";
+	var default_ts = "", default_ss = "";
+	var default_margin = "5px", default_br = "5px"; default_padding = "5px";
+	var default_font = "Arial,Helvetica Neue,Helvetica,sans-serif";
 	
 	function setVarFromURL(varname, vardefault) {
 		if (params.has(varname)) {
@@ -15,24 +25,24 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Possible way to validate params:
 	// Set to a p element, fetch, see if it
 	// holds the set value
-	var talking_font_weight = setVarFromURL("tfw",900);
-	var silent_color = setVarFromURL("sc", "#ffffff");
-	var silent_font_weight = setVarFromURL("sfw", 400);
+	var talking_font_weight = setVarFromURL("tfw", default_tfw);
+	var silent_color = setVarFromURL("sc", default_sc);
+	var silent_font_weight = setVarFromURL("sfw", default_sfw);
 	if (params.has("r") && params.has("g") && params.has("b") && params.has("a")) {
 		var p_background = "rgba(" + params.get("r") + "," + params.get("g") + "," + params.get("b") + "," +params.get("a") + ")"; 
 	} else {
-		var p_background = "rgba(0,0,0,0.5)";
+		var p_background = default_background;
 	};
-	var font_size = setVarFromURL("fs", "22px");
-	var p_padding = setVarFromURL("pad", "5px");
-	var p_border_radius = setVarFromURL("br", "5px");
-	var p_font = setVarFromURL("font", "Arial,Helvetica Neue,Helvetica,sans-serif");
-	var div_width = setVarFromURL("width", "400px");
-	var p_margin = setVarFromURL("margin", "5px");
-	var talking_prefix = setVarFromURL("tp", ">>");
-	var talking_suffix = setVarFromURL("ts", "");
-	var silent_prefix = setVarFromURL("sp", "");
-	var silent_suffix = setVarFromURL("ss", "");
+	var font_size = setVarFromURL("fs", default_fs);
+	var p_padding = setVarFromURL("pad", default_padding);
+	var p_border_radius = setVarFromURL("br", default_br);
+	var p_font = setVarFromURL("font", default_font);
+	var div_width = setVarFromURL("width", default_width);
+	var p_margin = setVarFromURL("margin", default_margin);
+	var talking_prefix = setVarFromURL("tp", default_tp);
+	var talking_suffix = setVarFromURL("ts", default_ts);
+	var silent_prefix = setVarFromURL("sp", default_sp);
+	var silent_suffix = setVarFromURL("ss", default_ss);
 	var maindiv = document.getElementById("maindiv");
 	maindiv.style.width = div_width;
 	
