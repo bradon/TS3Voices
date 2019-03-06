@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var p_font = setVarFromURL("font", default_font);
 	document.getElementById("font").value = p_font;
 	var div_width = setVarFromURL("width", default_width);
+	document.getElementById("divwidth").value = div_width;
 	var p_margin = setVarFromURL("margin", default_margin);
 	var talking_prefix = setVarFromURL("tp", default_tp);
 	document.getElementById("tp").value = talking_prefix;
@@ -239,6 +240,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		update_urls();
 	}
 	
+	function div_width_change(event) {
+		div_width = event.target.value;
+		document.getElementById("maindiv").style.width = div_width;
+		console.log(div_width);
+		update_urls();
+	}
+	
 	create_p("MAX_LENGTH_NAME_WHOS_TALKING12", true);
 	create_p("MAX_LENGTH_NAME_WHOS_SILENT123", false);
 	create_p("Normal Silent User", false);
@@ -260,5 +268,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("fs").addEventListener("change", font_size_change, false);
 	document.getElementById("font").addEventListener("change", font_style_change, false);
 	document.getElementById("tp").addEventListener("change", talking_prefix_change, false);
+	document.getElementById("divwidth").addEventListener("change", div_width_change, false);
 	update_urls();
 }, false);
