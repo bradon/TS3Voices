@@ -29,6 +29,8 @@ teamspeak plugins folder/TS3Voices/html to change styles yourself
 # Compiling Yourself
 Clone this repo, and run get_libwebsockets.bat to set up the libwebsockets dependency.
 
+Build with visual studio 2017. If you have 64bit 7-Zip you can use copy_to_plugin.bat to build the distributable plugin file.
+
 Refer to a one of the released plugin files for the structure of the final plugin.
 
 Ts3_plugin files are just zip files. Rename it to .zip, or use software like 7-zip to open it
