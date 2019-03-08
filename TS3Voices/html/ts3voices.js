@@ -136,11 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						talking(existinguser);
 
 					} else {
-						// Not talking, change color back
-						// 2 is a special case where we ignore the users state
-						if (data.users[i].talking != 2) {
-							silent(existinguser);
-						}
+						silent(existinguser);
 					}
 				}
 			}

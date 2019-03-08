@@ -137,18 +137,8 @@ static char* build_userlist() {
 			int talking;
 			//If current user is talking, different call
 			if (clientList[i] == myID) {
-				// The talking callback is reliable for the current user.
-				// return a special case
-				talking = 2;
-				//10 for int return is plenty of room.
-				//ts3Functions.getClientSelfVariableAsInt(serverID, 10, &talking);
-				// Self Variable PTT vs Voice 
-				//if (talking == 1) {
-				//	talking = 0;
-				//}
-				//else {
-				//	talking = 1;
-				//}
+				// Function is reliable; previous problems were due to incorrect flag
+				ts3Functions.getClientSelfVariableAsInt(serverID, CLIENT_FLAG_TALKING, &talking);
 			} 
 			else {
 				ts3Functions.getClientVariableAsInt(serverID, clientList[i], CLIENT_FLAG_TALKING, &talking);
