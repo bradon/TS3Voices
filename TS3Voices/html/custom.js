@@ -55,18 +55,23 @@ document.addEventListener("DOMContentLoaded", function() {
 	var font_size = setVarFromURL("fs", default_fs);
 	document.getElementById("fs").value = font_size;
 	var p_padding = setVarFromURL("pad", default_padding);
+	document.getElementById("pad").value = p_padding;
 	var p_border_radius = setVarFromURL("br", default_br);
+	document.getElementById("br").value = p_border_radius;
 	var p_font = setVarFromURL("font", default_font);
 	document.getElementById("font").value = p_font;
 	var div_width = setVarFromURL("width", default_width);
 	document.getElementById("divwidth").value = div_width;
 	var p_margin = setVarFromURL("margin", default_margin);
+	document.getElementById("margin").value = p_margin;
 	var talking_prefix = setVarFromURL("tp", default_tp);
 	document.getElementById("tp").value = talking_prefix;
 	var talking_suffix = setVarFromURL("ts", default_ts);
+	document.getElementById("ts").value = talking_suffix;
 	var silent_prefix = setVarFromURL("sp", default_sp);
+	document.getElementById("sp").value = silent_prefix;
 	var silent_suffix = setVarFromURL("ss", default_ss);
-
+	document.getElementById("ss").value = silent_suffix;
 	var maindiv = document.getElementById("maindiv");
 	maindiv.style.width = div_width;
 	
@@ -247,6 +252,63 @@ document.addEventListener("DOMContentLoaded", function() {
 		update_urls();
 	}
 	
+	function border_radius_change(event) {
+		p_border_radius = event.target.value;
+		if (!(""+p_border_radius).endsWith("px")) {
+			p_border_radius = p_border_radius + "px";
+		};
+		var p_list = document.getElementsByTagName("p");
+		for (i=0; i<p_list.length; i++) {
+			p_list[i].style.borderRadius = p_border_radius;
+		};
+		update_urls();
+	}
+	
+	function margin_change(event) {
+		p_margin = event.target.value;
+		var p_list = document.getElementsByTagName("p");
+		for (i=0; i<p_list.length; i++) {
+			p_list[i].style.margin = p_margin;
+		};
+		update_urls();
+	}
+	
+	function talking_suffix_change(event) {
+		talking_suffix = event.target.value;
+		var p_list = document.getElementsByTagName("p");
+		for (i=0; i<p_list.length; i++) {
+			p_list[i].childNodes[2].nodeValue = talking_suffix;
+		};
+		update_urls();
+	}
+	
+	function silent_prefix_change(event) {
+		silent_prefix = event.target.value;
+		var p_list = document.getElementsByTagName("p");
+		for (i=0; i<p_list.length; i++) {
+			p_list[i].childNodes[0].nodeValue = silent_prefix;
+		};
+		update_urls();
+	}
+	
+	function silent_suffix_change(event) {
+		silent_suffix = event.target.value;
+		var p_list = document.getElementsByTagName("p");
+		for (i=0; i<p_list.length; i++) {
+			p_list[i].childNodes[2].nodeValue = silent_suffix;
+		};
+		update_urls();
+	}
+	
+	function padding_change(event) {
+		p_padding = event.target.value;
+		var p_list = document.getElementsByTagName("p");
+		for (i=0; i<p_list.length; i++) {
+			p_list[i].style.padding = p_padding;
+		};
+		update_urls();
+	}
+	
 	create_p("MAX_LENGTH_NAME_WHOS_TALKING12", true);
 	create_p("MAX_LENGTH_NAME_WHOS_SILENT123", false);
 	create_p("Normal Silent User", false);
@@ -269,5 +331,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("font").addEventListener("change", font_style_change, false);
 	document.getElementById("tp").addEventListener("change", talking_prefix_change, false);
 	document.getElementById("divwidth").addEventListener("change", div_width_change, false);
+	document.getElementById("br").addEventListener("change", border_radius_change, false);
+	document.getElementById("margin").addEventListener("change", margin_change, false);
+	document.getElementById("ts").addEventListener("change", talking_suffix_change, false);
+	document.getElementById("sp").addEventListener("change", silent_prefix_change, false);
+	document.getElementById("ss").addEventListener("change", silent_suffix_change, false);
+	document.getElementById("pad").addEventListener("change", padding_change, false);
 	update_urls();
 }, false);
