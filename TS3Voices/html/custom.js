@@ -210,13 +210,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		update_urls();
 	}
 	
-	function content_example_change(event) {
-		if (event.target.value != "None") {
-			document.getElementById("maindiv").style.backgroundImage="url('"+event.target.value+"')";
-		} else {
-			document.getElementById("maindiv").style.backgroundImage="";
-		}
-	}
+	//function content_example_change(event) {
+	//	if (event.target.value != "None") {
+	//		document.getElementById("maindiv").style.backgroundImage="url('"+event.target.value+"')";
+	//	} else {
+	//		document.getElementById("maindiv").style.backgroundImage="";
+	//	}
+	//}
+	// Example removed
 	
 	function font_size_change(event) {
 		font_size = event.target.value;
@@ -326,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("p_g").addEventListener("change", background_color_change, false);
 	document.getElementById("p_b").addEventListener("change", background_color_change, false);
 	document.getElementById("p_a").addEventListener("change", background_color_change, false);
-	document.getElementById("content_example").addEventListener("change", content_example_change, false);
+	// disable as example removed document.getElementById("content_example").addEventListener("change", content_example_change, false);
 	document.getElementById("fs").addEventListener("change", font_size_change, false);
 	document.getElementById("font").addEventListener("change", font_style_change, false);
 	document.getElementById("tp").addEventListener("change", talking_prefix_change, false);
