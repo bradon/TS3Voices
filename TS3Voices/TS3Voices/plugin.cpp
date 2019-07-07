@@ -56,7 +56,7 @@ static struct TS3Functions ts3Functions;
 #define _strcpy(dest, destSize, src) { strncpy(dest, src, destSize-1); (dest)[destSize-1] = '\0'; }
 #endif
 
-#define PLUGIN_API_VERSION 22
+#define PLUGIN_API_VERSION 23
 
 #define PATH_BUFSIZE 512
 #define COMMAND_BUFSIZE 128
