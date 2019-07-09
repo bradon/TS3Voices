@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var default_ts = "", default_ss = "";
 	var default_margin = "5px", default_br = "5px"; default_padding = "5px";
 	var default_font = "Arial,Helvetica Neue,Helvetica,sans-serif";
+	var default_hide = 0;
 	
 	function setVarFromURL(varname, vardefault) {
 		if (params.has(varname)) {
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		};
 	};
 	var talking_color = setVarFromURL("tc", "#ffffff");
+	var hide_silent = setVarFromURL("hide_silent", default_hide);
 	// Possible way to validate params:
 	// Set to a p element, fetch, see if it
 	// holds the set value
@@ -47,6 +49,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	maindiv.style.width = div_width;
 	
 	function talking(p_element) {
+		if (hide_silent==1) {
+			p_element.style.display = "Block";
+		}
 		if (!(p_element.classList.contains("talking"))) {
 			p_element.childNodes[0].nodeValue = talking_prefix;
 			p_element.childNodes[2].nodeValue = talking_suffix;
@@ -57,6 +62,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function silent(p_element) {
+		if (hide_silent==1) {
+			p_element.style.display = "None";
+		}
 		if ((p_element.classList.contains("talking"))) {
 			p_element.childNodes[0].nodeValue = silent_prefix;
 			p_element.childNodes[2].nodeValue = silent_suffix;
