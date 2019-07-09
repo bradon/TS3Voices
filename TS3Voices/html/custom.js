@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var default_ts = "", default_ss = "";
 	var default_margin = "5px", default_br = "5px"; default_padding = "5px";
 	var default_font = "Arial,Helvetica Neue,Helvetica,sans-serif";
+	var default_hide = 1;
 	
 	function setVarFromURL(varname, vardefault) {
 		if (params.has(varname)) {
@@ -25,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Set to a p element, fetch, see if it
 	// holds the set value
 	var talking_color = setVarFromURL("tc", default_tc);
+	var hide_silent = setVarFromURL("hide_silent", default_hide);
+	document.getElementById("silent_selector").selectedIndex = hide_silent;
 	document.getElementById("tc").value = talking_color;
 	var talking_font_weight = setVarFromURL("tfw",default_tfw);
 	var tfw_option = document.createElement("option");
@@ -90,6 +93,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			newp.style.color=talking_color;
 			newp.style.fontWeight=talking_font_weight;
 		} else {
+			if (hide_silent==1) {
+			newp.style.display = "None";
+			}
 			newp.classList.add("silent");
 			var prefix = document.createTextNode(silent_prefix);
 			var suffix = document.createTextNode(silent_suffix);
@@ -112,6 +118,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		var url_end = "";
 		if (font_size != default_fs) {
 			url_end += "fs=" + font_size + "&";
+		};
+		if (hide_silent != default_hide) {
+			url_end += "hide_silent=" + hide_silent + "&";
 		};
 		if (p_font != default_font) {
 			url_end += "font=" + encodeURI(p_font) + "&";
@@ -310,11 +319,24 @@ document.addEventListener("DOMContentLoaded", function() {
 		update_urls();
 	}
 	
+	function hide_silent_change(event) {
+		hide_silent = document.getElementById("silent_selector").selectedIndex
+		var p_list = document.getElementsByClassName("silent");
+		for (i=0; i<p_list.length; i++) {
+			if (hide_silent==0) {
+				p_list[i].style.display="Block";
+			} else {
+				p_list[i].style.display="none";
+			}
+		};
+		update_urls();
+	}
+	
 	create_p("MAX_LENGTH_NAME_WHOS_TALKING12", true);
 	create_p("MAX_LENGTH_NAME_WHOS_SILENT123", false);
 	create_p("Normal Silent User", false);
 	create_p("Normal Talking User", true);
-	create_p("EmojiName🙃💩", false);
+	create_p("EmojiName🙃💩", true);
 	
 	tc = document.getElementById("tc");
 	tc.addEventListener("change", talking_color_change, false);
@@ -339,4 +361,5 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("ss").addEventListener("change", silent_suffix_change, false);
 	document.getElementById("pad").addEventListener("change", padding_change, false);
 	update_urls();
+	document.getElementById("silent_selector").addEventListener("change", hide_silent_change, false);
 }, false);

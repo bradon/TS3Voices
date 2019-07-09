@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var default_ts = "", default_ss = "";
 	var default_margin = "5px", default_br = "5px"; default_padding = "5px";
 	var default_font = "Arial,Helvetica Neue,Helvetica,sans-serif";
-	var default_hide = 0;
+	var default_hide = 1;
 	
 	function setVarFromURL(varname, vardefault) {
 		if (params.has(varname)) {
