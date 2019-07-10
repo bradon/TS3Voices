@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var default_margin = "5px", default_br = "5px"; default_padding = "5px";
 	var default_font = "Arial,Helvetica Neue,Helvetica,sans-serif";
 	var default_hide = 1;
+	var default_name = "";
 	
 	function setVarFromURL(varname, vardefault) {
 		if (params.has(varname)) {
@@ -22,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			return vardefault;
 		};
 	};
+	
+	var streamer_name = setVarFromURL("name", default_name);
 	var talking_color = setVarFromURL("tc", "#ffffff");
 	var hide_silent = setVarFromURL("hide_silent", default_hide);
 	// Possible way to validate params:
@@ -62,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	function silent(p_element) {
-		if (hide_silent==1) {
+		if (hide_silent==1 && p_element.childNodes[1].nodeValue != streamer_name) {
 			p_element.style.display = "None";
 		}
 		if ((p_element.classList.contains("talking"))) {
