@@ -1,4 +1,33 @@
+:root {
+	--talking-color: #ffffff;
+	--silent-color: #ffffff;
+	--talking-font-weight: 900;
+	--silent-font-weight: 400;
+	--font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+	--font-size: 22px;
+	--background-color: rgba(0, 0, 0, 0.5);
+	--container-width: 400px;
+	--margin: 5px;
+	--padding: 5px;
+	--border-radius: 5px;
+	--talking-prefix: none;
+	--talking-suffix: none;
+	--silent-prefix: none;
+	--silent-suffix: none;
+}
+
+body {
+	font-size: var(--font-size);
+	font-family: var(--font-family);
+}
+
 p {
+	background-color: var(--background-color);
+	color: var(--silent-color);
+	font-weight: var(--silent-font-weight);
+	padding: var(--padding);
+	margin: var(--margin);
+	border-radius: var(--border-radius);
 	vertical-align: top;
 	line-height: 1em;
 	overflow: hidden;
@@ -9,11 +38,34 @@ p {
 	-1px 1px 0 #000,
 	1px, 1px 0 #000;*/
 }
+p::before {
+	content: var(--silent-prefix);
+}
+p::after {
+	content: var(--silent-suffix);
+}
 
 #maindiv {
 	overflow: hidden;
+	width: var(--container-width);
 }
 
 /* Used as a tag */
 .talking {
+	color: var(--talking-color);
+	font-weight: var(--talking-font-weight);
+}
+p.talking::before {
+	content: var(--talking-prefix);
+}
+p.talking::after {
+	content: var(--talking-suffix);
+}
+
+.hidden {
+	display: none;
+}
+.hidden.always-visible,
+.always-visible {
+	display: block;
 }
