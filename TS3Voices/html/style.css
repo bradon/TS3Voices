@@ -16,12 +16,9 @@
 	--silent-suffix: none;
 }
 
-body {
+p {
 	font-size: var(--font-size);
 	font-family: var(--font-family);
-}
-
-p {
 	background-color: var(--background-color);
 	color: var(--silent-color);
 	font-weight: var(--silent-font-weight);

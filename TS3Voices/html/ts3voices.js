@@ -2,77 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	es = new EventSource("/sse/sourcename");
 	const params = new URLSearchParams(location.search);
 
-	function setVarFromURL(varname, vardefault) {
-		if (params.has(varname)) {
-			return params.get(varname);
-		} else {
-			return vardefault;
-		}
-	}
-
-	var streamer_name = setVarFromURL("name", '');
-	var hide_silent = setVarFromURL("hide_silent", 1);
-
-	// Map Parameters to css vars
-	const paramToCssVar = {
-		'tc'	: {name: '--talking-color',			type: 'color'},
-		'sc'	: {name: '--silent-color',			type: 'color'},
-		'tfw'	: {name: '--talking-font-weight',	type: 'int'},
-		'sfw'	: {name: '--silent-font-weight',	type: 'int'},
-		'font'	: {name: '--font-family',			type: 'font'},
-		'fs'	: {name: '--font-size',				type: 'int'},
-		'width'	: {name: '--container-width',		type: 'int'},
-		'margin': {name: '--margin',				type: 'int'},
-		'pad'	: {name: '--padding',				type: 'int'},
-		'br'	: {name: '--border-radius',			type: 'int'},
-		'tp'	: {name: '--talking-prefix',		type: 'txt'},
-		'ts'	: {name: '--talking-suffix',		type: 'txt'},
-		'sp'	: {name: '--silent-prefix',			type: 'txt'},
-		'ss'	: {name: '--silent-suffix',			type: 'txt'},
-		// Special case since currently background parameter is split into r, g, b & a
-		'background' : {name: '--background-color', type: 'color'}
-	};
-
-	function setCSSFromURL(varname) {
-		if (params.has(varname)) {
-			let val = params.get(varname);
-			switch (paramToCssVar[varname].type)
-			{
-				case 'color':
-					if(!val.startsWith('#') && !val.startsWith('rgb')) {
-						val = '#' + val;
-					}
-					break;
-				case 'txt':
-					val = '"' + val + '"';
-					break;
-				case 'int':
-				case 'font':
-				default:
-					break;
-			}
-			document.documentElement.style.setProperty(paramToCssVar[varname].name, val);
-		}
-	}
-
-	setCSSFromURL('tc');
-	setCSSFromURL('sc');
-	setCSSFromURL('tfw');
-	setCSSFromURL('sfw');
-	setCSSFromURL('font');
-	setCSSFromURL('fs');
-	setCSSFromURL('width');
-	setCSSFromURL('margin');
-	setCSSFromURL('pad');
-	setCSSFromURL('br');
-	setCSSFromURL('tp');
-	setCSSFromURL('ts');
-	setCSSFromURL('sp');
-	setCSSFromURL('ss');
-	if (params.has('r') && params.has('g') && params.has('b') && params.has('a')) {
-		let bg = 'rgba(' + params.get('r') + ',' + params.get('g') + ',' + params.get('b') + ',' + params.get('a') + ')';
-		document.documentElement.style.setProperty(paramToCssVar['background'].name, bg);
-	}
+	let varsFromURL = setAllFromURL(params);
+	let streamer_name = varsFromURL.streamer_name;
+	let hide_silent = varsFromURL.hide_silent;
 
 	function talking(p_element) {
 		if (hide_silent === 1) {

@@ -3,22 +3,6 @@ body {
 	background-color: #F8F8FF;
 }
 
-p {
-	vertical-align: top;
-	line-height: 1em;
-	overflow: hidden;
-	white-space: nowrap;
-	/*text-shadow:
-	-1px -1px 0 #000,
-	1px -1px 0 #000,
-	-1px 1px 0 #000,
-	1px, 1px 0 #000;*/
-}
-
-#maindiv {
-	overflow: hidden;
-}
-
 #container {
 	display: flex;
 }
@@ -30,12 +14,6 @@ p {
 #custom {
 	flex-grow: 1;
 	text-align: left;
-}
-/* Used as a tag */
-.talking {
-}
-
-.silent {
 }
 
 #background_div {
