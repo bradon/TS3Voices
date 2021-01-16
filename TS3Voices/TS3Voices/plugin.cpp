@@ -452,7 +452,10 @@ void ts3plugin_shutdown() {
 	}
 }
 
-
+/****************************** Optional functions ********************************/
+/*
+ * Following functions are optional, if not needed you don't need to implement them.
+ */
 
 /*
  * If the plugin wants to use error return codes, plugin commands, hotkeys or menu items, it needs to register a command ID. This function will be
@@ -464,6 +467,88 @@ void ts3plugin_registerPluginID(const char* id) {
 	pluginID = (char*)malloc(sz * sizeof(char));
 	_strcpy(pluginID, sz, id);  /* The id buffer will invalidate after exiting this function */
 	printf("PLUGIN: registerPluginID: %s\n", pluginID);
+}
+
+/* Required to release the memory for parameter "data" allocated in ts3plugin_infoData and ts3plugin_initMenus */
+void ts3plugin_freeMemory(void* data)
+{
+	free(data);
+}
+
+
+ /* Helper function to create a menu item */
+static struct PluginMenuItem* createMenuItem(enum PluginMenuType type, int id, const char* text, const char* icon)
+{
+	struct PluginMenuItem* menuItem = (struct PluginMenuItem*)malloc(sizeof(struct PluginMenuItem));
+	menuItem->type = type;
+	menuItem->id = id;
+	_strcpy(menuItem->text, PLUGIN_MENU_BUFSZ, text);
+	_strcpy(menuItem->icon, PLUGIN_MENU_BUFSZ, icon);
+	return menuItem;
+}
+
+/* Some makros to make the code to create menu items a bit more readable */
+#define BEGIN_CREATE_MENUS(x) const size_t sz = x + 1; size_t n = 0; *menuItems = (struct PluginMenuItem**)malloc(sizeof(struct PluginMenuItem*) * sz);
+#define CREATE_MENU_ITEM(a, b, c, d) (*menuItems)[n++] = createMenuItem(a, b, c, d);
+#define END_CREATE_MENUS (*menuItems)[n++] = NULL; assert(n == sz);
+
+
+ /*
+  * Menu IDs for this plugin. Pass these IDs when creating a menuitem to the TS3 client. When the menu item is triggered,
+  * ts3plugin_onMenuItemEvent will be called passing the menu ID of the triggered menu item.
+  * These IDs are freely choosable by the plugin author. It's not really needed to use an enum, it just looks prettier.
+  */
+enum {
+	MENU_ID_SHOW_CONFIG = 1
+};
+
+ /*
+  * Initialize plugin menus.
+  * This function is called after ts3plugin_init and ts3plugin_registerPluginID. A pluginID is required for plugin menus to work.
+  * Both ts3plugin_registerPluginID and ts3plugin_freeMemory must be implemented to use menus.
+  * If plugin menus are not used by a plugin, do not implement this function or return NULL.
+  */
+void ts3plugin_initMenus(struct PluginMenuItem*** menuItems, char** menuIcon)
+{
+	/*
+	 * Create the menus
+	 * There are three types of menu items:
+	 * - PLUGIN_MENU_TYPE_CLIENT:  Client context menu
+	 * - PLUGIN_MENU_TYPE_CHANNEL: Channel context menu
+	 * - PLUGIN_MENU_TYPE_GLOBAL:  "Plugins" menu in menu bar of main window
+	 *
+	 * Menu IDs are used to identify the menu item when ts3plugin_onMenuItemEvent is called
+	 *
+	 * The menu text is required, max length is 128 characters
+	 *
+	 * The icon is optional, max length is 128 characters. When not using icons, just pass an empty string.
+	 * Icons are loaded from a subdirectory in the TeamSpeak client plugins folder. The subdirectory must be named like the
+	 * plugin filename, without dll/so/dylib suffix
+	 * e.g. for "test_plugin.dll", icon "1.png" is loaded from <TeamSpeak 3 Client install dir>\plugins\test_plugin\1.png
+	 */
+	BEGIN_CREATE_MENUS(1);  /* IMPORTANT: Number of menu items must be correct! */
+	CREATE_MENU_ITEM(PLUGIN_MENU_TYPE_GLOBAL, MENU_ID_SHOW_CONFIG, "Open Configuration", "");
+	END_CREATE_MENUS;  /* Includes an assert checking if the number of menu items matched */
+
+		/*
+	 * Specify an optional icon for the plugin. This icon is used for the plugins submenu within context and main menus
+	 * If unused, set menuIcon to NULL
+	 */
+	//*menuIcon = (char*)malloc(PLUGIN_MENU_BUFSZ * sizeof(char));
+	//_strcpy(*menuIcon, PLUGIN_MENU_BUFSZ, "some.png");
+
+
+	/*
+	 * Menus can be enabled or disabled with: ts3Functions.setPluginMenuEnabled(pluginID, menuID, 0|1);
+	 * Test it with plugin command: /test enablemenu <menuID> <0|1>
+	 * Menus are enabled by default. Please note that shown menus will not automatically enable or disable when calling this function to
+	 * ensure Qt menus are not modified by any thread other the UI thread. The enabled or disable state will change the next time a
+	 * menu is displayed.
+	 */
+	 /* For example, this would disable MENU_ID_GLOBAL_2: */
+	 /* ts3Functions.setPluginMenuEnabled(pluginID, MENU_ID_GLOBAL_2, 0); */
+
+	 /* All memory allocated in this function will be automatically released by the TeamSpeak client later by calling ts3plugin_freeMemory */
 }
 
 /************************** TeamSpeak callbacks ***************************/
@@ -502,6 +587,33 @@ void ts3plugin_onTalkStatusChangeEvent(uint64 serverConnectionHandlerID, int sta
 	}
 }
 
+/*
+ * Called when a plugin menu item (see ts3plugin_initMenus) is triggered. Optional function, when not using plugin menus, do not implement this.
+ *
+ * Parameters:
+ * - serverConnectionHandlerID: ID of the current server tab
+ * - type: Type of the menu (PLUGIN_MENU_TYPE_CHANNEL, PLUGIN_MENU_TYPE_CLIENT or PLUGIN_MENU_TYPE_GLOBAL)
+ * - menuItemID: Id used when creating the menu item
+ * - selectedItemID: Channel or Client ID in the case of PLUGIN_MENU_TYPE_CHANNEL and PLUGIN_MENU_TYPE_CLIENT. 0 for PLUGIN_MENU_TYPE_GLOBAL.
+ */
+void ts3plugin_onMenuItemEvent(uint64 serverConnectionHandlerID, enum PluginMenuType type, int menuItemID, uint64 selectedItemID)
+{
+	switch (type) {
+	case PLUGIN_MENU_TYPE_GLOBAL:
+		/* Global menu item was triggered. selectedItemID is unused and set to zero. */
+		switch (menuItemID)
+		{
+		case MENU_ID_SHOW_CONFIG:
+			system("start http://localhost:8079/custom.html");
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
+	}
+}
 
 /* Clientlib rare */
 // None used
