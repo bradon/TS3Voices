@@ -7,6 +7,9 @@ libwebsockets/
 *.ts3_plugin
 plugins/
 
+# IDE
+.idea
+
 # Compiled Object files
 *.slo
 *.lo
