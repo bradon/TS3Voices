@@ -6,7 +6,7 @@ body {
 input,
 button,
 select {
-    min-width: 170px;
+    min-width: 200px;
 }
 
 #container {
