@@ -1,35 +1,39 @@
 body {
-	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	background-color: #F8F8FF;
+    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+    background-color: #F8F8FF;
+}
+
+input,
+button,
+select {
+    min-width: 170px;
 }
 
 #container {
-	display: flex;
+    display: flex;
 }
 
 #seperator {
-	width: 50px;
+    width: 50px;
 }
 
-#custom {
-	flex-grow: 1;
-	text-align: left;
+.warning {
+    color: red;
 }
 
-#background_div {
-	display:flex;
-	line-height: 1.6em;
+/* Color Pickr */
+.pcr-app input,
+.pcr-app button,
+.pcr-app select{
+    min-width: unset;
 }
-
-#background_labels {
+.picker {
+    display: inline-block;
 }
-#background_picker {
-	flex-grow: 1;
-	text-align: left;
+.pcr-button {
+    border: 2px solid black;
 }
-
-/* Color Pickr set input full width*/
 .pcr-app .pcr-interaction .pcr-result {
-	flex: unset;
-	width: 100%;
+    flex: unset;
+    width: 100%;
 }

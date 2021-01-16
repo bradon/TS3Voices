@@ -1,29 +1,29 @@
 /*
  * TODO: I was thinking we could make it easy to add new themes,
  *    by letting this map be split of and generate the custom.html settings depending on it.
- * In custom.js we generate the settings file depending on the param name & type given in this map.
+ * [DONE] In custom.js we generate the settings file depending on the param name & type given in this map.
  * We create a select depending on all the the <Name>.theme.js files in the folder and their associated <Name>.theme.css
  * When starting index we inject the theme depending on a URL param with the theme name.
  * Also maybe add "label" to create custom.html settings page
  */
 // Map Parameters to css vars
 const paramToCssVar = {
-    'tc'	: {name: '--talking-color',			type: 'color'},
-    'sc'	: {name: '--silent-color',			type: 'color'},
-    'tfw'	: {name: '--talking-font-weight',	type: 'weight'},
-    'sfw'	: {name: '--silent-font-weight',	type: 'weight'},
-    'font'	: {name: '--font-family',			type: 'font'},
-    'fs'	: {name: '--font-size',				type: 'size'},
-    'width'	: {name: '--container-width',		type: 'size'},
-    'margin': {name: '--margin',				type: 'size'},
-    'pad'	: {name: '--padding',				type: 'size'},
-    'br'	: {name: '--border-radius',			type: 'size'},
-    'tp'	: {name: '--talking-prefix',		type: 'txt'},
-    'ts'	: {name: '--talking-suffix',		type: 'txt'},
-    'sp'	: {name: '--silent-prefix',			type: 'txt'},
-    'ss'	: {name: '--silent-suffix',			type: 'txt'},
+    'tc'    : {name: '--talking-color',         type: 'color',  label: 'Talking Color:'},
+    'sc'    : {name: '--silent-color',          type: 'color',  label: 'Silent Color:'},
+    'tfw'   : {name: '--talking-font-weight',   type: 'weight', label: 'Talking Font-Weight:'},
+    'sfw'   : {name: '--silent-font-weight',    type: 'weight', label: 'Silent Font-Weight:'},
+    'font'  : {name: '--font-family',           type: 'font',   label: 'Font Family:'},
+    'fs'    : {name: '--font-size',             type: 'size',   label: 'Font Size:'},
+    'width' : {name: '--container-width',       type: 'size',   label: 'Width:'},
+    'margin': {name: '--margin',                type: 'size',   label: 'Margin:'},
+    'pad'   : {name: '--padding',               type: 'size',   label: 'Padding:'},
+    'br'    : {name: '--border-radius',         type: 'size',   label: 'Border Radius:'},
+    'tp'    : {name: '--talking-prefix',        type: 'txt',    label: 'Talking Prefix:'},
+    'ts'    : {name: '--talking-suffix',        type: 'txt',    label: 'Talking Suffix:'},
+    'sp'    : {name: '--silent-prefix',         type: 'txt',    label: 'Talking Prefix:'},
+    'ss'    : {name: '--silent-suffix',         type: 'txt',    label: 'Talking Suffix:'},
     // Special case since currently background parameter is split into r, g, b & a
-    'background' : {name: '--background-color', type: 'rgba'}
+    'background' : {name: '--background-color', type: 'rgba',   label: 'Client Label Color:'}
 };
 
 const default_streamer_name = '';
