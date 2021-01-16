@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+window.onload =  function() {
 	es = new EventSource("/sse/sourcename");
 	const params = new URLSearchParams(location.search);
 
@@ -99,6 +99,4 @@ document.addEventListener("DOMContentLoaded", function() {
 	} catch (exception) {
 		alert("<p>Error" + exception);
 	}
-}, false);
-	
-	
+};

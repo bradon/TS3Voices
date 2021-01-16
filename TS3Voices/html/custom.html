@@ -5,9 +5,9 @@
     <link rel="stylesheet" type="text/css" href="/pickr/monolith.min.css">
     <script src="/pickr/pickr.min.js"></script>
 
+    <script src="/themes.js"></script>
     <script src="/shared.js"></script>
     <script src="/custom.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="custom.css">
 </head>
 <body>
@@ -24,6 +24,10 @@ The preview updates when you click anywhere on the page outside the box you just
     </div>
     <table>
         <tbody id="config">
+            <tr>
+                <td><label for="theme_selector">Select Theme:</label></td>
+                <td><select id="theme_selector"></select></td>
+            </tr>
             <tr>
                 <td><label for="streamer_name">Streamer Name:</label></td>
                 <td><input type="text" id="streamer_name"/> (User with this name will always be shown)</td>
