@@ -1,6 +1,10 @@
 <html>
 <head>
 	<meta charset=utf-8 http-equiv="Content-Language" content="en"/>
+	<!-- Color Pickr https://github.com/Simonwep/pickr -->
+	<link rel="stylesheet" type="text/css" href="/pickr/monolith.min.css">
+	<script src="/pickr/pickr.min.js"></script>
+
 	<script src="/shared.js"></script>
 	<script src="/custom.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -53,15 +57,7 @@ The preview updates when you click anywhere on the page outside the box you just
 						<option value=900>900 = Black (Heavy)</option>
 					  </select><br>
 		Overlay color: <br>
-		<div id="background_div">
-		<div id="background_labels">Red <br> Green <br> Blue <br> Opacity</div>
-			<div id="background_picker">
-				<input type="range" min="0" max="255" name="p_r" id="p_r"><br>
-				<input type="range" min="0" max="255" name="p_g" id="p_g"><br>
-				<input type="range" min="0" max="255" name="p_b" id="p_b"><br>
-				<input type="range" min="0" max="10" name="p_a" id="p_a"><br>
-			</div>
-		</div>
+		<button id="background"></button>
 		<b>Uncommon Settings:</b></br>
 		Width: <input type="number" id="divwidth"><br>
 		Border Radius: <input type="text" id="br"><br>

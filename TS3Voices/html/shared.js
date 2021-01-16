@@ -43,10 +43,6 @@ function setCSSFromURL(params, varname) {
     }
 }
 
-function getRGBAString(r,g,b,a) {
-    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
-}
-
 function setCSSByVarname(varname, val) {
     let valTrim = val.trimLeft();
     switch (paramToCssVar[varname].type)
@@ -78,28 +74,10 @@ function setAllFromURL(params) {
     let streamer_name = setVarFromURL(params, "streamer_name", default_streamer_name);
     let hide_silent = setVarFromURL(params, "hide_silent", default_hide_silent);
     Object.keys(paramToCssVar).forEach( function(key) {
-        if(paramToCssVar[key].type !== 'rgba') {
-            setCSSFromURL(params, key);
-        }
+        setCSSFromURL(params, key);
     });
-    if (params.has('r') && params.has('g') && params.has('b') && params.has('a')) {
-        let bg = getRGBAString(params.get('r'),params.get('g'),params.get('b'),params.get('a'));
-        document.documentElement.style.setProperty(paramToCssVar['background'].name, bg);
-    }
 
     return { streamer_name: streamer_name, hide_silent: hide_silent};
-}
-function getRGBAColor(varname) {
-    let ret = {r: 0, g: 0, b: 0, a: 0.5}
-    let cssVal = getComputedStyle(document.documentElement).getPropertyValue(paramToCssVar[varname].name).trim();
-    ret.full = cssVal;
-    cssVal = cssVal.replace(/rgba\(|\)| /g, '');
-    let split = cssVal.split(',');
-    ret.r  = split[0];
-    ret.g  = split[1];
-    ret.b  = split[2];
-    ret.a  = split[3];
-    return ret;
 }
 
 /***
@@ -109,9 +87,6 @@ function getRGBAColor(varname) {
  ***/
 function getCSSVariableByParam(varname) {
     let cssMapping = paramToCssVar[varname];
-    if(cssMapping.type === 'rgba') {
-        return getRGBAColor(varname);
-    }
     let ret = getComputedStyle(document.documentElement).getPropertyValue(cssMapping.name).trim();
     if(cssMapping.type === 'txt') {
         ret = ret.replace(/"/g, '');

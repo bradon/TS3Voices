@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+window.onload =  function() {
 	const params = new URLSearchParams(location.search);
 	console.log(params);
 	/*****************
@@ -7,11 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function getCSSValues() {
 		let ret = {};
 		Object.keys(paramToCssVar).forEach( function(key) {
-			if(paramToCssVar[key].type === 'rgba') {
-				ret[key] = getRGBAColor(key);
-			} else {
-				ret[key] = getCSSVariableByParam(key);
-			}
+			ret[key] = getCSSVariableByParam(key);
 		});
 		return ret;
 	}
@@ -19,6 +15,76 @@ document.addEventListener("DOMContentLoaded", function() {
 	let defaultValues = getCSSValues();
 	defaultValues.streamer_name = default_streamer_name;
 	defaultValues.hide_silent = default_hide_silent;
+	console.log("default values:");
+	console.log(defaultValues);
+
+	/***********************
+	 * Load Current Values *
+	 ***********************/
+	let varsFromURL = setAllFromURL(params);
+	let currentValues = getCSSValues();
+	currentValues.streamer_name = varsFromURL.streamer_name;
+	currentValues.hide_silent = varsFromURL.hide_silent;
+
+	/************************
+	 * Create Example Users *
+	 ************************/
+	function create_p(p_text, talking, streamer=false) {
+		let newp = document.createElement("p");
+		if (talking) {
+			newp.classList.add("talking");
+		} else {
+			if (currentValues.hide_silent === 1) {
+				newp.classList.add("hidden");
+			}
+			newp.classList.add('silent');
+		}
+		if(streamer) {
+			newp.classList.add('always-visible');
+		}
+		newp.appendChild(document.createTextNode(p_text));
+		document.getElementById("maindiv").appendChild(newp);
+	}
+
+	create_p("Streamer Name NotTalking", false, true);
+	create_p("MAX_LENGTH_NAME_WHOS_TALKING12", true);
+	create_p("MAX_LENGTH_NAME_WHOS_SILENT123", false);
+	create_p("Normal Silent User", false);
+	create_p("Normal Talking User", true);
+	create_p("EmojiName🙃💩", true);
+
+	/****************************
+	 * Generate Config Elements *
+	 ****************************/
+	var pickr = {};
+	function createColorPickr(varname) {
+		let hasOpacity =  paramToCssVar[varname].type === 'rgba';
+		pickr[varname] = Pickr.create({
+				el: '#'+varname,
+				theme: 'monolith', //'classic' or 'monolith', or 'nano'
+				silent: false,
+			  	default: currentValues[varname],
+				defaultRepresentation: (hasOpacity ? 'RGBA' : 'HEX'),
+				components: {
+					// Main components
+					preview: true,
+					opacity: hasOpacity,
+					hue: true,
+					// Input / output Options
+					interaction: {
+						rgba: hasOpacity,
+						hex: true,
+						hsla: false,
+						hsva: false,
+						cmyk: false,
+						input: true,
+						clear: false,
+						save: false
+					}
+				}
+			});
+	}
+	createColorPickr('background');
 
 	/**********************************
 	 * Set Elements to current Values *
@@ -39,12 +105,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			element.selectedIndex = 0;
 		}
 	}
-
-	let varsFromURL = setAllFromURL(params);
-	let currentValues = getCSSValues();
-	currentValues.streamer_name = varsFromURL.streamer_name;
-	currentValues.hide_silent = varsFromURL.hide_silent;
-
 	document.getElementById("streamer_name").value = currentValues.streamer_name;
 	document.getElementById("silent_selector").selectedIndex = currentValues.hide_silent;
 	document.getElementById("tc").value = currentValues.tc;
@@ -66,29 +126,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("sp").value = currentValues.sp;
 	document.getElementById("ss").value = currentValues.ss;
 
-	document.getElementById("p_r").value = currentValues['background'].r;
-	document.getElementById("p_g").value = currentValues['background'].g;
-	document.getElementById("p_b").value = currentValues['background'].b;
-	document.getElementById("p_a").value = currentValues['background'].a * 10;
-
-	console.log(currentValues);
-
 	/*******************
 	 * OnChange Events *
 	 *******************/
 	function compareAndReturnQuery(varname) {
 		let ret = '';
-		if (varname in paramToCssVar &&
-			paramToCssVar[varname].type === 'rgba') {
-			/* TODO: really change rgba values to full value & color picker instead of this */
-			if(defaultValues[varname].full !== currentValues[varname].full) {
-				ret += 'r=' + currentValues[varname].r + '&';
-				ret += 'g=' + currentValues[varname].g + '&';
-				ret += 'b=' + currentValues[varname].b + '&';
-				ret += 'a=' + currentValues[varname].a + '&';
-			}
-		}
-		else if(defaultValues[varname] !== currentValues[varname]) {
+		if(defaultValues[varname] !== currentValues[varname]) {
 			ret += varname + '=' + encodeURIComponent(currentValues[varname]) + '&';
 		}
 		return ret;
@@ -106,17 +149,21 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.getElementById("obsurl").value= url_start + url_end;
 		document.getElementById("customurl").value= custom_start + url_end;
 	}
-
 	function updateCurrentValues(varname, value) {
 		currentValues[varname] = value;
 		if(varname !== 'hide_silent' && varname !== 'streamer_name') {
-			if (paramToCssVar[varname].type === 'rgba') {
-				setCSSByVarname(varname, value.full);
-			} else {
-				setCSSByVarname(varname, value);
-			}
+			setCSSByVarname(varname, value);
 		}
 		update_urls();
+	}
+	function resetCurrentValues(varname) {
+		if (params.has(varname)) {
+			setCSSByVarname(varname, decodeURIComponent(params.get(varname)));
+			currentValues[varname] = getCSSVariableByParam(varname);
+		} else {
+			setCSSByVarname(varname, defaultValues[varname]);
+			currentValues[varname] = defaultValues[varname];
+		}
 	}
 
 	function streamer_name_change(event) {
@@ -177,20 +224,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		updateCurrentValues('ss', event.target.value);
 	}
 
-	function background_color_change(event) {
-		let r = document.getElementById("p_r").value;
-		let g = document.getElementById("p_g").value;
-		let b = document.getElementById("p_b").value;
-		let a = document.getElementById("p_a").value / 10
-		let bg = {
-			full: getRGBAString(r, g, b, a),
-			r: r,
-			g: g,
-			b: b,
-			a: a
-		}
-		updateCurrentValues('background', bg);
-	}
+	pickr['background'].on('change', function (color, source, instance) {
+		updateCurrentValues('background', color.toRGBA().toString(1));
+		instance.applyColor();
+	});
 	//function content_example_change(event) {
 	//	if (event.target.value != "None") {
 	//		document.getElementById("maindiv").style.backgroundImage="url('"+event.target.value+"')";
@@ -199,33 +236,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	//	}
 	//}
 	// Example removed
-
-	/************************
-	 * Create Example Users *
-	 ************************/
-	function create_p(p_text, talking, streamer=false) {
-		let newp = document.createElement("p");
-		if (talking) {
-			newp.classList.add("talking");
-		} else {
-			if (currentValues.hide_silent === 1) {
-				newp.classList.add("hidden");
-			}
-			newp.classList.add('silent');
-		}
-		if(streamer) {
-			newp.classList.add('always-visible');
-		}
-		newp.appendChild(document.createTextNode(p_text));
-		document.getElementById("maindiv").appendChild(newp);
-	}
-
-	create_p("Streamer Name NotTalking", false, true);
-	create_p("MAX_LENGTH_NAME_WHOS_TALKING12", true);
-	create_p("MAX_LENGTH_NAME_WHOS_SILENT123", false);
-	create_p("Normal Silent User", false);
-	create_p("Normal Talking User", true);
-	create_p("EmojiName🙃💩", true);
 
 	/**************************
 	 * Attach OnChange Events *
@@ -236,10 +246,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("sc").addEventListener("change", silent_color_change, false);
 	document.getElementById("tfw").addEventListener("change", talking_font_weight_change, false);
 	document.getElementById("sfw").addEventListener("change", silent_font_weight_change, false);
-	document.getElementById("p_r").addEventListener("change", background_color_change, false);
-	document.getElementById("p_g").addEventListener("change", background_color_change, false);
-	document.getElementById("p_b").addEventListener("change", background_color_change, false);
-	document.getElementById("p_a").addEventListener("change", background_color_change, false);
 	document.getElementById("fs").addEventListener("change", font_size_change, false);
 	document.getElementById("font").addEventListener("change", font_style_change, false);
 	document.getElementById("tp").addEventListener("change", talking_prefix_change, false);
@@ -250,6 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("sp").addEventListener("change", silent_prefix_change, false);
 	document.getElementById("ss").addEventListener("change", silent_suffix_change, false);
 	document.getElementById("pad").addEventListener("change", padding_change, false);
+	//document.getElementById('background').addEventListener('colorChange', background_color_change,false);
 	// disable as example removed document.getElementById("content_example").addEventListener("change", content_example_change, false);
 	update_urls();
-}, false);
+}

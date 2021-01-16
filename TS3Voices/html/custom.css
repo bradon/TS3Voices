@@ -27,3 +27,9 @@ body {
 	flex-grow: 1;
 	text-align: left;
 }
+
+/* Color Pickr set input full width*/
+.pcr-app .pcr-interaction .pcr-result {
+	flex: unset;
+	width: 100%;
+}
