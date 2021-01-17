@@ -220,7 +220,7 @@ window.onload =  function() {
     function createTextElement(varname, paramToCssVarElement) {
         containerElement.insertAdjacentHTML('beforeend', '' +
             '<tr>' +
-                '<td><lable for="' + varname + '">' + paramToCssVarElement.label + '</lable></td>' +
+                '<td><label for="' + varname + '">' + paramToCssVarElement.label + '</label></td>' +
                 '<td><input type="text" id="' + varname + '" value="' + currentValues[varname] + '"/></td>' +
             '</tr>');
         document.getElementById(varname).addEventListener("change", function (event) {
