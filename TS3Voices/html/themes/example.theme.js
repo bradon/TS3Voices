@@ -15,3 +15,6 @@ const paramToCssVar = {
     'ss'    : {name: '--silent-suffix',         type: 'txt',    label: 'Talking Suffix:'},
     'background' : {name: '--background-color', type: 'rgba',   label: 'Client Label Color:'}
 };
+
+const default_streamer_name = '';
+const default_hide_silent = 1;

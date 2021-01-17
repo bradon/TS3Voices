@@ -1,6 +1,3 @@
-const default_streamer_name = '';
-const default_hide_silent = 1;
-
 function setVarFromURL(params, varname, vardefault) {
     if (params.has(varname)) {
         return params.get(varname);
