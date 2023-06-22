@@ -21,7 +21,6 @@
 
 
 // Demo plugin includes
-
 #ifdef _WIN32
 #pragma warning (disable : 4100)  /* Disable Unreferenced parameter warning */
 #include <Windows.h>
@@ -298,6 +297,7 @@ static const struct lws_http_mount mount_sse = {
 	/* .cache_reusable */		0,
 	/* .cache_revalidate */		0,
 	/* .cache_intermediaries */	0,
+	/* .cache_no */				0,
 	/* .origin_protocol */		LWSMPRO_CALLBACK, /* dynamic */
 	/* .mountpoint_len */		4,		  /* char count */
 	/* .basic_auth_login_file */	NULL,
@@ -320,6 +320,7 @@ static struct lws_http_mount mount = {
 	/* .cache_reusable */		0,
 	/* .cache_revalidate */		0,
 	/* .cache_intermediaries */	0,
+	/* .cache_no */				0,
 	/* .origin_protocol */		LWSMPRO_FILE,	/* files in a dir */
 	/* .mountpoint_len */		1,		/* char count */
 	/* .basic_auth_login_file */	NULL,
@@ -374,7 +375,7 @@ const char* ts3plugin_name() {
 
 /* Plugin version */
 const char* ts3plugin_version() {
-    return "0.1";
+    return "0.2";
 }
 
 /* Plugin API version. Must be the same as the clients API major version, else the plugin fails to load. */
