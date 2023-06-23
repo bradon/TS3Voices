@@ -1,76 +1,61 @@
 <html>
 <head>
-	<meta charset=utf-8 http-equiv="Content-Language" content="en"/>
-	<script src="/custom.js"></script>
-	<link rel="stylesheet" type="text/css" href="custom.css">
+    <meta charset=utf-8 http-equiv="Content-Language" content="en"/>
+    <!-- Color Pickr https://github.com/Simonwep/pickr -->
+    <link rel="stylesheet" type="text/css" href="/pickr/monolith.min.css">
+    <script src="/pickr/pickr.min.js"></script>
+
+    <script src="/themes.js"></script>
+    <script src="/shared.js"></script>
+    <script src="/custom.js"></script>
+    <link rel="stylesheet" type="text/css" href="custom.css">
 </head>
 <body>
 Preview of settings shown on the left, change the settings on the right, and copy the result url to use at the bottom of the page.
-</br>
-<!-- 
-Remove the background examples
-Show overlay over an example game:
-
-<select id="content_example">
-<option>None</option>
-<option value="stellaris.png">Stellaris</option>
-<option value="arma.png">ArmA 3</option>
-<option value="elite.png">Elite Dangerous</option>
--->
-</select></br>
+<br>
 Remember, you can resize and move the browser source in OBS. Change sizes and widths to change proportion, not final size in your stream.
-</br>
-Supported fonts include Arial, Times New Roman, Consolas, Courier, Verdana and Comic Sans MS</br>
-The preview updates when you click anywhere on the page outside the box you just updated.
+<br>
+Supported fonts include Arial, Times New Roman, Consolas, Courier, Verdana and Comic Sans MS<br>
+The preview updates when you click anywhere on the page outside the box you just updated.<br><br>
 <div id="container">
-<div id="maindiv">
+    <div id="preview">
+        <div id="maindiv">
+        </div>
+    </div>
+    <div id="seperator">
+    </div>
+    <table>
+        <tbody id="config">
+            <tr>
+                <td><label for="theme_selector">Select Theme:</label></td>
+                <td><select id="theme_selector"></select></td>
+            </tr>
+            <tr>
+                <td><label for="streamer_name">Streamer Name:</label></td>
+                <td><input type="text" id="streamer_name"/> (User with this name will always be shown)</td>
+            </tr>
+            <tr>
+                <td><label for="silent_selector">Hide Silent:</label></td>
+                <td><select id="silent_selector">
+                        <option value=0>Show</option>
+                        <option value=1>Hide</option>
+                </select></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<div id="seperator">
-</div>
-<div id="custom">
-	<b>Common Settings:</b></br>
-	Talking Color: <input type="color" id="tc" name="tc"> 
-	Font weight: <select id = "tfw">
-								<option value=100>100</option>
-								<option value=400>400</option>
-								<option value=700>700</option>
-								<option value=900>900</option>
-							  <select></br>
-	Talking Prefix: <input type="text" id="tp" size="10"> 
-	Suffix: <input type="text" id="ts" size="10"></br>
-	Hide Silent: <select name="silent_selector" id="silent_selector">
-					<option value=0>Show</option>
-					<option value=1>Hide</option>
-				</select></br>
-	Silent color: <input type="color" id="sc" name="sc">
-	Font weight: <select name = "sfw" id="sfw">
-								<option value=100>100</option>
-								<option value=400>400</option>
-								<option value=700>700</option>
-								<option value=900>900</option>
-							  </select></br>
-	Overlay color: </br>
-	<div id="background_div">
-	<div id="background_labels">Red </br> Green </br> Blue </br> Opacity</div>
-	<div id="background_picker">
-	<input type="range" min="0" max="255" name="p_r" id="p_r"></br>
-	<input type="range" min="0" max="255" name="p_g" id="p_g"></br>
-	<input type="range" min="0" max="255" name="p_b" id="p_b"></br>
-	<input type="range" min="0" max="10" name="p_a" id="p_a"></br>
-	</div>
-	</div>
-	<b>Uncommon Settings:</b></br>
-	Width: <input type="number" id="divwidth"></br>
-	Border Radius: <input type="text" id="br"></br>
-	Margin: <input type="text" id="margin"></br>
-	Padding: <input type="text" id="pad"></br>
-	Font size: <input type="text" id="fs" name="fs"></br>
-	Font: <input type="text" id="font" name="font"></br>
-	Silent Prefix: <input type="text" id="sp" size="10">
-	Suffix: <input type="text" id="ss" size="10"></br>
-</div>
-</div>
-URL to use in OBS: <input id="obsurl" type="text" size="80"></br>
-URL to recover custom options:<input id="customurl" type="text" size="70"></br>
+<br>
+<table>
+    <tbody>
+        <tr>
+            <td><label for="obsurl">URL to use in OBS:</label></td>
+            <td><input id="obsurl" type="text" size="80"></td>
+        </tr>
+        <tr>
+            <td><label for="customurl">URL to recover custom options:</label></td>
+            <td><input id="customurl" type="text" size="80"></td>
+        </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -1,51 +1,39 @@
 body {
-	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	background-color: #F8F8FF;
+    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+    background-color: #F8F8FF;
 }
 
-p {
-	vertical-align: top;
-	line-height: 1em;
-	overflow: hidden;
-	white-space: nowrap;
-	/*text-shadow:
-	-1px -1px 0 #000,
-	1px -1px 0 #000,
-	-1px 1px 0 #000,
-	1px, 1px 0 #000;*/
-}
-
-#maindiv {
-	overflow: hidden;
+input,
+button,
+select {
+    min-width: 200px;
 }
 
 #container {
-	display: flex;
+    display: flex;
 }
 
 #seperator {
-	width: 50px;
+    width: 50px;
 }
 
-#custom {
-	flex-grow: 1;
-	text-align: left;
-}
-/* Used as a tag */
-.talking {
+.warning {
+    color: red;
 }
 
-.silent {
+/* Color Pickr */
+.pcr-app input,
+.pcr-app button,
+.pcr-app select{
+    min-width: unset;
 }
-
-#background_div {
-	display:flex;
-	line-height: 1.6em;
+.picker {
+    display: inline-block;
 }
-
-#background_labels {
+.pcr-button {
+    border: 2px solid black;
 }
-#background_picker {
-	flex-grow: 1;
-	text-align: left;
+.pcr-app .pcr-interaction .pcr-result {
+    flex: unset;
+    width: 100%;
 }

@@ -26,6 +26,8 @@ Feel free to make requests.
 If you know some css or feel adventurous you can edit styles.css in the
 teamspeak plugins folder/TS3Voices/html to change styles yourself
 
+For creating your own themes please see /TS3Voices/html/themes/README.md
+
 # Compiling Yourself
 Clone this repo, and run get_libwebsockets.bat to set up the libwebsockets dependency.
 
